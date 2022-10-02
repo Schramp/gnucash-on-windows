@@ -21,4 +21,5 @@ jobs:
           # On Cygwin, replace executable symlinks with hardlinks
           hardlinks: 0# optional, default is 0
       - uses: actions/checkout@v3
+      - run: dir
       - run: setup-mingw64.ps1
