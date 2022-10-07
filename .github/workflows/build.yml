@@ -22,4 +22,7 @@ jobs:
           hardlinks: 0# optional, default is 0
       - uses: actions/checkout@v3
       - run: dir
-      - run: setup-mingw64.ps1
+      - name: Run PWSH
+        shell: pwsh
+        run: |
+          .\setup-mingw64.ps1
