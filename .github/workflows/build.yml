@@ -29,4 +29,4 @@ jobs:
     - uses: actions/checkout@v3
     - run: dir
     - name: Run Build
-      run: TARGET=gnucash-maint jhbuild -f jhbuildrc shell
+      run: jhbuild -f jhbuildrc shell
