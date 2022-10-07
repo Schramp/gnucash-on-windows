@@ -5,24 +5,28 @@ jobs:
   check-bats-version:
     runs-on: windows-latest
     steps:
-      - name: Install MinGW
-  # You may pin to the exact commit or the version.
-  # uses: egor-tensin/setup-mingw@f3c5d799aadf8fa230ac67a422b01dd085bbc96b
-        uses: egor-tensin/setup-mingw@v2
-        with:
-          # Target platform
-          platform: x64 # optional, default is x64
-          # Install Cygwin packages
-          cygwin: 0 # optional, default is 0
-          # Enable static linking workaround
-          static: 1 # optional, default is 1
-          # Set up cc/c++ executables
-          cc: 1 # optional, default is 1
-          # On Cygwin, replace executable symlinks with hardlinks
-          hardlinks: 0# optional, default is 0
-      - uses: actions/checkout@v3
-      - run: dir
-      - name: Run PWSH
-        shell: pwsh
-        run: |
-          .\setup-mingw64.ps1 -target_dir .\gcdev64
+    - name: Setup MSYS2
+      # You may pin to the exact commit or the version.
+      # uses: msys2/setup-msys2@493b5b9e37e67d55e3003f8d21519e07a1db266c
+      uses: msys2/setup-msys2@v2
+      with:
+        # Variant of the environment to set by default: MSYS, MINGW32, MINGW64, UCRT64, CLANG32 or CLANG64
+        msystem: MINGW64
+        # Default value for MSYS2_PATH_TYPE environment variable: strict, inherit or minimal
+        path-type: minimal
+        # Update MSYS2 installation through pacman
+        # update: # optional
+        # After installation and/or update, install additional packages through pacman
+        # install: # optional
+        # After installation and/or update, install additional packages through pacboy
+        # pacboy: # optional
+        # Retrieve and extract base installation from upstream GitHub Releases
+        release: true
+        # Where to install MSYS2
+        # location: # optional, default is RUNNER_TEMP
+        # What to do when run on an incompatible runner: fatal, warn
+        # platform-check-severity: # optional, default is fatal
+    - uses: actions/checkout@v3
+    - run: dir
+    - name: Run Build
+      run: TARGET=gnucash-maint jhbuild -f jhbuildrc shell
