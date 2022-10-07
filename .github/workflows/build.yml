@@ -25,4 +25,4 @@ jobs:
       - name: Run PWSH
         shell: pwsh
         run: |
-          .\setup-mingw64.ps1
+          .\setup-mingw64.ps1 -RunAsAdmin
