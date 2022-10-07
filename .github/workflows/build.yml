@@ -25,4 +25,4 @@ jobs:
       - name: Run PWSH
         shell: pwsh
         run: |
-          .\setup-mingw64.ps1 -RunAsAdmin
+          .\setup-mingw64.ps1 -target_dir .\gcdev64
